@@ -1,0 +1,10 @@
+{
+    "puppets": [
+        {
+            "name": "hola"
+        },
+        {
+            "name": "adios"
+        }
+    ]
+}
