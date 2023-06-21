@@ -7,7 +7,7 @@ export const ListPuppets = (props: { list: Puppet[]; }) => {
       {props.list.map((item: Puppet, index) => (
         <div
           className="puppet-list"
-          style={{ color: rainbow[index] }}
+          style={{ color: "#ff7b46" }}
           key={item.name}>
           {item.name}</div>
       ))}

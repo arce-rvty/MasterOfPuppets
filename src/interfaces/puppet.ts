@@ -6,5 +6,6 @@ export enum GameStatus {
 }
 export interface Puppet {
   name: string,
-  status: GameStatus
+  status: GameStatus,
+  img: string
 }
