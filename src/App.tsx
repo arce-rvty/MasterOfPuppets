@@ -1,10 +1,10 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import { GameStatus, Puppet } from "./interfaces/puppet";
 import MainContainer from "./components/MainContainer";
 import { Button } from "@mui/material";
 import 'animate.css';
-import { getImgToShow, getPuppetsFromFile } from "./utils";
+import { getCurrentPuppet, getPuppetsFromFile } from "./utils";
 import { SoundController } from "./components/SoundContoller";
 
 
@@ -30,11 +30,12 @@ function App() {
     setPlaySound(true);
     setPeople(peopleCopy);
   };
+  const currentPuppet = getCurrentPuppet(people);
 
   return (
     <>
       <div>
-        <img src={getImgToShow(people)} className="logo react" />
+        <img src={currentPuppet == undefined ? "/images/doll.png" : currentPuppet.img} className="logo react" />
       </div>
       <div style={{ minHeight: "300px" }}>
         <MainContainer listPuppets={people} />
