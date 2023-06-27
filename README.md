@@ -25,5 +25,5 @@
 - Download node modules:
 
 ```text
-    yarn
+    yarn build
 ```
