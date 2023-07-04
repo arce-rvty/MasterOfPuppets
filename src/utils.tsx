@@ -25,7 +25,7 @@ export const getPuppetsFromFile = () => {
     peopleList.push({
       name: p.name,
       status: GameStatus.Waiting,
-      img: "/images/" + p.name + ".png",
+      img: "/images/" + p.image
     });
   });
   return peopleList;
