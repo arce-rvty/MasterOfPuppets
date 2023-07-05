@@ -1,10 +1,12 @@
 {
     "puppets": [
         {
-            "name": "hola"
+            "name": "name1",
+            "image": "doll.png"
         },
         {
-            "name": "adios"
+            "name": "name2",
+            "image": "doll.png"
         }
     ]
 }
