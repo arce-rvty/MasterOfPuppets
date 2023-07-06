@@ -1,5 +1,9 @@
 # MasterOfPuppets
 
+## Basic to start
+- Install node: https://nodejs.org/en
+- Install yarn: npm install --global yarn 
+
 ## Run
 
 - Download node modules:
@@ -20,7 +24,7 @@
     src/data/puppets.json
 ```
 
-## Build
+## Build (not necessary for scrums)
 
 - Download node modules:
 
