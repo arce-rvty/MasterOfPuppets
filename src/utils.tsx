@@ -21,7 +21,6 @@ export const getImgToShow = (people: Puppet[]) => {
 export const getPuppetsFromFile = () => {
   const peopleList: Puppet[] = [];
   data.puppets.forEach((p) => {
-    console.log(p);
     peopleList.push({
       name: p.name,
       status: GameStatus.Waiting,

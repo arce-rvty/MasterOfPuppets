@@ -1,7 +1,8 @@
 import { Grid } from "@mui/material";
 import { GameStatus, Puppet } from "../interfaces/puppet";
 import { ListPuppets } from "./ListPuppets";
-import { getNameToShow } from "../utils";
+import { getCurrentPuppet, getNameToShow } from "../utils";
+import TimerController from "./TImerController";
 
 const MainContainer = (props: { listPuppets: Puppet[] }) => {
   return (
@@ -12,6 +13,7 @@ const MainContainer = (props: { listPuppets: Puppet[] }) => {
         </Grid>
         <Grid item xs={4}>
           <div className="main-puppet">{getNameToShow(props.listPuppets)}</div>
+          <TimerController puppet={getCurrentPuppet(props.listPuppets)} />
         </Grid>
         <Grid item xs={4}>
           <ListPuppets list={props.listPuppets.filter( p => p.status == GameStatus.Sleeping)}/>

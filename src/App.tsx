@@ -26,6 +26,7 @@ function App() {
     const randomIndex = Math.floor(Math.random() * peopleToChoose.length);
     // Set new one:
     peopleToChoose[randomIndex].status = GameStatus.Talking
+    peopleToChoose[randomIndex].startTime = new Date();
     // Play audio:
     setPlaySound(true);
     setPeople(peopleCopy);
