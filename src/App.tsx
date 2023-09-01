@@ -44,11 +44,13 @@ function App() {
       <div style={{ minHeight: "300px" }}>
         <MainContainer listPuppets={people} />
       </div>
-
       <div className="card">
         <Button size="large" variant="contained" color="error" onClick={() => setNextPuppet()}>NEXT PUPPET</Button>
       </div>
       <p className="read-the-docs">
+        <div>
+          Scrum Master's proverb:
+        </div>
         Tyranny and slavery is the only way
       </p>
       <SoundController playSound={playSound} />
