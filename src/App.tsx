@@ -18,6 +18,9 @@ function App() {
     const speaker = peopleCopy.find(p => p.status == GameStatus.Talking);
     if (speaker) {
       speaker.status = GameStatus.Sleeping;
+      if (speaker.startTime) {
+        speaker.elapsedTime = (Date.now() - speaker.startTime.getTime());
+      }
     }
     // Then select new puppet:
     const peopleToChoose = peopleCopy.filter(p => p.status == GameStatus.Waiting)

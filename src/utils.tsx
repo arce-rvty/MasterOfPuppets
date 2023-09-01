@@ -7,7 +7,7 @@ export const getNameToShow = (people: Puppet[]) => {
   else return "Waiting puppets...";
 };
 
-export const getCurrentPuppet = (people: Puppet[] ) :  Puppet | undefined=> {
+export const getCurrentPuppet = (people: Puppet[]): Puppet | undefined => {
   const currentSpeaker = people.find((p: Puppet) => p.status == GameStatus.Talking);
   if (currentSpeaker) return currentSpeaker;
 };
@@ -29,3 +29,9 @@ export const getPuppetsFromFile = () => {
   });
   return peopleList;
 };
+
+export const millisToMinutesAndSeconds = (millis: number) => {
+  const minutes = Math.floor(millis / 60000);
+  const seconds = ((millis % 60000) / 1000).toFixed(0);
+  return minutes + ":" + (+seconds < 10 ? '0' : '') + seconds;
+}

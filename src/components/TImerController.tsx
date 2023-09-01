@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Puppet } from "../interfaces/puppet";
+import { millisToMinutesAndSeconds } from "../utils";
 
 const TimerController = (props: {
     puppet: undefined | Puppet
@@ -12,12 +13,6 @@ const TimerController = (props: {
             setTime(new Date());
         }, 1000);
     }, [])
-
-    const millisToMinutesAndSeconds = (millis: number) => {
-        const minutes = Math.floor(millis / 60000);
-        const seconds = ((millis % 60000) / 1000).toFixed(0);
-        return minutes + ":" + (+seconds < 10 ? '0' : '') + seconds;
-    }
 
     const calculateTime = () => {
         if (puppet === undefined || puppet.startTime === undefined) {

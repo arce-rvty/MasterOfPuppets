@@ -8,5 +8,6 @@ export interface Puppet {
   name: string,
   status: GameStatus,
   img: string,
-  startTime?: Date
+  startTime?: Date,
+  elapsedTime?: number
 }
