@@ -4,7 +4,7 @@ import { millisToMinutesAndSeconds } from "../utils";
 export const ListPuppets = (props: { list: Puppet[]; }) => {
   return (
     <>
-      {props.list.map((item: Puppet, index) => (
+      {props.list.map((item: Puppet) => (
         <div
           className="puppet-list"
           style={{ color: "#ff7b46" }}
