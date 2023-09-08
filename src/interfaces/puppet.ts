@@ -4,6 +4,11 @@ export enum GameStatus {
   Talking,
   Sleeping
 }
+
+export enum GlobalGameStatus {
+  Playing,
+  Podium 
+}
 export interface Puppet {
   name: string,
   status: GameStatus,

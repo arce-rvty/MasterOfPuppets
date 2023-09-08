@@ -8,7 +8,9 @@ export const getNameToShow = (people: Puppet[]) => {
 };
 
 export const getCurrentPuppet = (people: Puppet[]): Puppet | undefined => {
-  const currentSpeaker = people.find((p: Puppet) => p.status == GameStatus.Talking);
+  const currentSpeaker = people.find(
+    (p: Puppet) => p.status == GameStatus.Talking
+  );
   if (currentSpeaker) return currentSpeaker;
 };
 
@@ -18,13 +20,22 @@ export const getImgToShow = (people: Puppet[]) => {
   else return "/images/doll.png";
 };
 
+export const getWinnerName = (people: Puppet[]): string => {
+  people.sort((a, b) => {
+    if (a.elapsedTime !== undefined && b.elapsedTime !== undefined)
+      return a.elapsedTime - b.elapsedTime;
+    return 0;
+  });
+  return people[0].name;
+};
+
 export const getPuppetsFromFile = () => {
   const peopleList: Puppet[] = [];
   data.puppets.forEach((p) => {
     peopleList.push({
       name: p.name,
       status: GameStatus.Waiting,
-      img: "/images/" + p.image
+      img: "/images/" + p.image,
     });
   });
   return peopleList;
@@ -33,5 +44,5 @@ export const getPuppetsFromFile = () => {
 export const millisToMinutesAndSeconds = (millis: number) => {
   const minutes = Math.floor(millis / 60000);
   const seconds = ((millis % 60000) / 1000).toFixed(0);
-  return minutes + ":" + (+seconds < 10 ? '0' : '') + seconds;
-}
+  return minutes + ":" + (+seconds < 10 ? "0" : "") + seconds;
+};
