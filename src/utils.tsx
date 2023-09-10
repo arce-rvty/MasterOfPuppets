@@ -1,5 +1,4 @@
 import { GameStatus, Puppet } from "./interfaces/puppet";
-import data from "./data/puppets.json";
 
 export const getNameToShow = (people: Puppet[]) => {
   const currentSpeaker = people.find((p) => p.status == GameStatus.Talking);
@@ -27,18 +26,6 @@ export const getWinnerName = (people: Puppet[]): string => {
     return 0;
   });
   return people[0].name;
-};
-
-export const getPuppetsFromFile = () => {
-  const peopleList: Puppet[] = [];
-  data.puppets.forEach((p) => {
-    peopleList.push({
-      name: p.name,
-      status: GameStatus.Waiting,
-      img: "/images/" + p.image,
-    });
-  });
-  return peopleList;
 };
 
 export const millisToMinutesAndSeconds = (millis: number) => {
