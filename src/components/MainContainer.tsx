@@ -1,12 +1,18 @@
 import { Grid } from "@mui/material";
 import { GameStatus, GlobalGameStatus, Puppet } from "../interfaces/puppet";
 import { ListPuppets } from "./ListPuppets";
-import { getCurrentPuppet, getNameToShow, getWinnerName } from "../utils";
+import {
+  getCurrentPuppet,
+  getLoserName,
+  getNameToShow,
+  getWinnerName,
+} from "../utils";
 import TimerController from "./TImerController";
 
 const MainContainer = (props: {
   listPuppets: Puppet[];
   gameStatus: GlobalGameStatus;
+  podium: boolean;
 }) => {
   return (
     <div>
@@ -22,7 +28,9 @@ const MainContainer = (props: {
           <div className="main-puppet">
             {props.gameStatus === GlobalGameStatus.Playing
               ? getNameToShow(props.listPuppets)
-              : getWinnerName(props.listPuppets)}
+              : props.podium
+              ? getWinnerName(props.listPuppets)
+              : getLoserName(props.listPuppets)}
           </div>
           <TimerController puppet={getCurrentPuppet(props.listPuppets)} />
         </Grid>

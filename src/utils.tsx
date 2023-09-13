@@ -19,13 +19,24 @@ export const getImgToShow = (people: Puppet[]) => {
   else return "/images/doll.png";
 };
 
-export const getWinnerName = (people: Puppet[]): string => {
+const sortPuppets = (people: Puppet[]) => {
   people.sort((a, b) => {
     if (a.elapsedTime !== undefined && b.elapsedTime !== undefined)
       return a.elapsedTime - b.elapsedTime;
     return 0;
   });
+};
+
+export const getWinnerName = (people: Puppet[]): string => {
+  if (people.length == 0) return "error";
+  sortPuppets(people);
   return people[0].name;
+};
+
+export const getLoserName = (people: Puppet[]): string => {
+  if (people.length == 0) return "error";
+  sortPuppets(people);
+  return people[people.length - 1].name;
 };
 
 export const millisToMinutesAndSeconds = (millis: number) => {

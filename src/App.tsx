@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { GameStatus, GlobalGameStatus, Puppet } from "./interfaces/puppet";
 import MainContainer from "./components/MainContainer";
@@ -13,6 +13,18 @@ function App() {
   const [gameStatus, setGameStatus] = useState<GlobalGameStatus>(
     GlobalGameStatus.Playing
   );
+  const [podium, setPodium] = useState<boolean>(false);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (gameStatus == GlobalGameStatus.Podium) {
+        setPlaySound(false);
+        setPodium((prev) => !prev);
+      }
+    }, 4000);
+    return () => {
+      clearInterval(timer);
+    };
+  }, [gameStatus]);
 
   const setNextPuppet = () => {
     // Get the current speaker and move to sleeping
@@ -44,8 +56,8 @@ function App() {
   const currentPuppet = getCurrentPuppet(people);
 
   const parseUserInputFile = async (e: any) => {
-    e.preventDefault()
-    const reader = new FileReader()
+    e.preventDefault();
+    const reader = new FileReader();
     reader.onload = async (e) => {
       const peopleList: Puppet[] = [];
       const dataRaw: any = JSON.parse(e.target?.result as string);
@@ -67,34 +79,39 @@ function App() {
         {gameStatus === GlobalGameStatus.Playing ? (
           <img
             src={
-              currentPuppet == undefined
-                ? "images/doll.png"
-                : currentPuppet.img
+              currentPuppet == undefined ? "images/doll.png" : currentPuppet.img
             }
             className="logo react"
           />
         ) : (
-          <img src={"images/banana.gif"} className="logo react" />
+          <img
+            src={podium ? "images/banana.gif" : "images/loser.png"}
+            className="logo react"
+          />
         )}
       </div>
-      {people.length === 0 ?
+      {people.length === 0 ? (
         <>
-          <div className="main-puppet">
-            Scrum Master Game
-          </div>
-          <Button
-            size="large"
-            variant="contained"
-            color="error"
-          >
+          <div className="main-puppet">Scrum Master Game</div>
+          <Button size="large" variant="contained" color="error">
             Upload
-            <input style={{ opacity: 0, width: '20px' }} type="file" accept=".json" onChange={(e) => parseUserInputFile(e)}>
-            </input>
+            <input
+              style={{ opacity: 0, width: "20px" }}
+              type="file"
+              accept=".json"
+              onChange={(e) => parseUserInputFile(e)}
+            ></input>
             File
           </Button>
-        </> : <>
+        </>
+      ) : (
+        <>
           <div style={{ minHeight: "300px" }}>
-            <MainContainer listPuppets={people} gameStatus={gameStatus} />
+            <MainContainer
+              listPuppets={people}
+              gameStatus={gameStatus}
+              podium={podium}
+            />
           </div>
           <div className="card">
             <Button
@@ -111,9 +128,8 @@ function App() {
             Tyranny and slavery is the only way
           </p>
           <SoundController playSound={playSound} />
-
-        </>}
-
+        </>
+      )}
     </>
   );
 }
