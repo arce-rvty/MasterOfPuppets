@@ -6,6 +6,8 @@ import { Button } from "@mui/material";
 import "animate.css";
 import { getCurrentPuppet } from "./utils";
 import { SoundController } from "./components/SoundContoller";
+import MainImage from "./components/MainImage";
+import WaitingLoadFile from "./components/WaitingLoadFile";
 
 function App() {
   const [people, setPeople] = useState<Puppet[]>([]);
@@ -55,55 +57,19 @@ function App() {
   };
   const currentPuppet = getCurrentPuppet(people);
 
-  const parseUserInputFile = async (e: any) => {
-    e.preventDefault();
-    const reader = new FileReader();
-    reader.onload = async (e) => {
-      const peopleList: Puppet[] = [];
-      const dataRaw: any = JSON.parse(e.target?.result as string);
-      dataRaw.puppets.forEach((p: any) => {
-        peopleList.push({
-          name: p.name,
-          status: GameStatus.Waiting,
-          img: "images/" + p.image,
-        });
-      });
-      setPeople(peopleList);
-    };
-    reader.readAsText(e.target.files[0]);
-  };
 
   return (
     <>
-      <div>
-        {gameStatus === GlobalGameStatus.Playing ? (
-          <img
-            src={
-              currentPuppet == undefined ? "images/doll.png" : currentPuppet.img
-            }
-            className="logo react"
-          />
-        ) : (
-          <img
-            src={podium ? "images/banana.gif" : "images/loser.png"}
-            className="logo react"
-          />
-        )}
-      </div>
+      <MainImage
+        gameStatus={gameStatus}
+        currentPuppet={currentPuppet}
+        podium={podium} />
       {people.length === 0 ? (
-        <>
-          <div className="main-puppet">Scrum Master Game</div>
-          <Button size="large" variant="contained" color="error">
-            Upload
-            <input
-              style={{ opacity: 0, width: "20px" }}
-              type="file"
-              accept=".json"
-              onChange={(e) => parseUserInputFile(e)}
-            ></input>
-            File
-          </Button>
-        </>
+        <WaitingLoadFile
+          setPeople={function (puppets: Puppet[]): void {
+            setPeople(puppets);
+          }}
+        />
       ) : (
         <>
           <div style={{ minHeight: "300px" }}>
