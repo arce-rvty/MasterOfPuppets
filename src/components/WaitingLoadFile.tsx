@@ -1,11 +1,17 @@
-import { Button } from "@mui/material";
+import { Button, FormControlLabel, Switch } from "@mui/material";
 import { GameStatus, Puppet } from "./../interfaces/puppet";
+import { PuppetOrder } from "./../interfaces/order";
+
 
 const WaitingLoadFile = (props: {
-    setPeople: (puppets: Puppet[]) => void
+    setPeople: (puppets: Puppet[]) => void,
+    setOrderCriterial: (order: PuppetOrder) => void
 }
 ) => {
-    const { setPeople } = props;
+    const { setPeople, setOrderCriterial } = props;
+    const handleToggle = (e: any) =>
+        setOrderCriterial(e.target.checked ? PuppetOrder.File : PuppetOrder.Random)
+
     const parseUserInputFile = async (e: any) => {
         e.preventDefault();
         const reader = new FileReader();
@@ -17,6 +23,7 @@ const WaitingLoadFile = (props: {
                     name: p.name,
                     status: GameStatus.Waiting,
                     img: "images/" + p.image,
+                    orderGroup: p.order
                 });
             });
             setPeople(peopleList);
@@ -36,6 +43,13 @@ const WaitingLoadFile = (props: {
             ></input>
             File
         </Button>
+        <div style={{ marginTop: '30px' }}>
+            <FormControlLabel
+                control={<Switch color="error" onClick={(e) => handleToggle(e)} />}
+                label="Order set by file"
+                labelPlacement="end"
+            />
+        </div>
     </>;
 }
 export default WaitingLoadFile;

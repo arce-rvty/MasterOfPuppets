@@ -11,6 +11,7 @@ export enum GlobalGameStatus {
 }
 export interface Puppet {
   name: string,
+  orderGroup?: number,
   status: GameStatus,
   img: string,
   startTime?: Date,
