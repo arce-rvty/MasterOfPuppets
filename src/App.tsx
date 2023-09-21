@@ -8,6 +8,8 @@ import { getCurrentPuppet } from "./utils";
 import { SoundController } from "./components/SoundContoller";
 import MainImage from "./components/MainImage";
 import WaitingLoadFile from "./components/WaitingLoadFile";
+import { PuppetOrder } from "./interfaces/order";
+import { OrderService } from "./services/orderService";
 
 function App() {
   const [people, setPeople] = useState<Puppet[]>([]);
@@ -16,6 +18,8 @@ function App() {
     GlobalGameStatus.Playing
   );
   const [podium, setPodium] = useState<boolean>(false);
+  const [orderCriterial, setOrderCriterial] = useState<PuppetOrder>(PuppetOrder.Random);
+
   useEffect(() => {
     const timer = setInterval(() => {
       if (gameStatus == GlobalGameStatus.Podium) {
@@ -47,7 +51,7 @@ function App() {
       setGameStatus(GlobalGameStatus.Podium);
       return;
     }
-    const randomIndex = Math.floor(Math.random() * peopleToChoose.length);
+    const randomIndex = OrderService.getNextPersonIndex(peopleToChoose, orderCriterial);
     // Set new one:
     peopleToChoose[randomIndex].status = GameStatus.Talking;
     peopleToChoose[randomIndex].startTime = new Date();
@@ -66,6 +70,7 @@ function App() {
         podium={podium} />
       {people.length === 0 ? (
         <WaitingLoadFile
+          setOrderCriterial={setOrderCriterial}
           setPeople={function (puppets: Puppet[]): void {
             setPeople(puppets);
           }}
