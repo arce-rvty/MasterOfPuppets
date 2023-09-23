@@ -23,7 +23,8 @@ const WaitingLoadFile = (props: {
                     name: p.name,
                     status: GameStatus.Waiting,
                     img: "images/" + p.image,
-                    orderGroup: p.order
+                    orderGroup: p.order,
+                    interruptTime: 0
                 });
             });
             setPeople(peopleList);
@@ -33,15 +34,19 @@ const WaitingLoadFile = (props: {
 
     return <>
         <div className="main-puppet">Scrum Master Game</div>
-        <Button size="large" variant="contained" color="error">
-            Upload
+        <Button
+            variant="contained"
+            component="label"
+            size="large"
+            color="error"
+        >
+            Upload File
             <input
-                style={{ opacity: 0, width: "20px" }}
                 type="file"
+                hidden
                 accept=".json"
                 onChange={(e) => parseUserInputFile(e)}
-            ></input>
-            File
+            />
         </Button>
         <div style={{ marginTop: '30px' }}>
             <FormControlLabel
