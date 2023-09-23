@@ -16,4 +16,5 @@ export interface Puppet {
   img: string,
   startTime?: Date,
   elapsedTime?: number
+  interruptTime: number
 }
