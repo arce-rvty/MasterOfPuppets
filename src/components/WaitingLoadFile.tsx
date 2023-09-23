@@ -1,6 +1,7 @@
 import { Button, FormControlLabel, Switch } from "@mui/material";
 import { GameStatus, Puppet } from "./../interfaces/puppet";
 import { PuppetOrder } from "./../interfaces/order";
+import { FileFormat, FileFormatPuppet } from "interfaces/fileFormat";
 
 
 const WaitingLoadFile = (props: {
@@ -9,16 +10,16 @@ const WaitingLoadFile = (props: {
 }
 ) => {
     const { setPeople, setOrderCriterial } = props;
-    const handleToggle = (e: any) =>
+    const handleToggle = (e: React.ChangeEvent<HTMLInputElement>) =>
         setOrderCriterial(e.target.checked ? PuppetOrder.File : PuppetOrder.Random)
 
-    const parseUserInputFile = async (e: any) => {
+    const parseUserInputFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
         const reader = new FileReader();
         reader.onload = async (e) => {
             const peopleList: Puppet[] = [];
-            const dataRaw: any = JSON.parse(e.target?.result as string);
-            dataRaw.puppets.forEach((p: any) => {
+            const dataRaw: FileFormat = JSON.parse(e.target?.result as string);
+            dataRaw.puppets.forEach((p: FileFormatPuppet) => {
                 peopleList.push({
                     name: p.name,
                     status: GameStatus.Waiting,
@@ -29,7 +30,8 @@ const WaitingLoadFile = (props: {
             });
             setPeople(peopleList);
         };
-        reader.readAsText(e.target.files[0]);
+        if (e.target.files)
+            reader.readAsText(e.target.files[0]);
     };
 
     return <>
