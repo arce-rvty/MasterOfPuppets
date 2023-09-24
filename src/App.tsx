@@ -18,7 +18,8 @@ function App() {
     GlobalGameStatus.Playing
   );
   const [podium, setPodium] = useState<boolean>(false);
-  const [orderCriterial, setOrderCriterial] = useState<PuppetOrder>(PuppetOrder.Random);
+  const [orderCriterial, setOrderCriterial] = useState<PuppetOrder>(PuppetOrder.File);
+  const [speaker, setSpeaker] = useState<string>('');
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -58,9 +59,36 @@ function App() {
     // Play audio:
     setPlaySound(true);
     setPeople(peopleCopy);
+    setSpeaker(peopleToChoose[randomIndex].name);
   };
+
   const currentPuppet = getCurrentPuppet(people);
 
+  const changeSpeakerPuppet = (newSpeakerName: string) => {
+    if (gameStatus == GlobalGameStatus.Podium) return;
+    const newSpeaker = people.find(person => person.name == newSpeakerName);
+    if (newSpeaker == undefined || currentPuppet == undefined) return;
+
+    // Scenario 1: Click on current speaker
+    if (currentPuppet.name == newSpeakerName) {
+      const prevSpeaker = people.find(person => person.name == speaker);
+
+      // Prevent doble click same name
+      if (prevSpeaker?.name == currentPuppet.name) return;
+
+      if (prevSpeaker && prevSpeaker.startTime) {
+        const delayTime = Date.now() - prevSpeaker.startTime.getTime();
+        prevSpeaker.interruptTime += delayTime;
+        currentPuppet.interruptTime -= delayTime;
+      }
+    }
+    // Scenario 2: Click other new speaker:
+    else {
+      // Start the speech of the interrupter
+      newSpeaker.startTime = new Date();
+    }
+    setSpeaker(newSpeakerName);
+  };
 
   return (
     <>
@@ -82,6 +110,8 @@ function App() {
               listPuppets={people}
               gameStatus={gameStatus}
               podium={podium}
+              changeSpeakerPuppet={changeSpeakerPuppet}
+              speaker={speaker}
             />
           </div>
           <div className="card">

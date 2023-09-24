@@ -52,7 +52,7 @@ const WaitingLoadFile = (props: {
         </Button>
         <div style={{ marginTop: '30px' }}>
             <FormControlLabel
-                control={<Switch color="error" onClick={(e) => handleToggle(e)} />}
+                control={<Switch color="error" onClick={(e: any) => handleToggle(e)} />}
                 label="Order set by file"
                 labelPlacement="end"
             />
