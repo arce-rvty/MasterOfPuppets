@@ -18,7 +18,7 @@ function App() {
     GlobalGameStatus.Playing
   );
   const [podium, setPodium] = useState<boolean>(false);
-  const [orderCriterial, setOrderCriterial] = useState<PuppetOrder>(PuppetOrder.File);
+  const [orderCriterial, setOrderCriterial] = useState<PuppetOrder>(PuppetOrder.Random);
   const [speaker, setSpeaker] = useState<string>('');
 
   useEffect(() => {
