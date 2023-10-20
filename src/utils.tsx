@@ -7,16 +7,9 @@ export const getNameToShow = (people: Puppet[]) => {
 };
 
 export const getCurrentPuppet = (people: Puppet[]): Puppet | undefined => {
-  const currentSpeaker = people.find(
+  return people.find(
     (p: Puppet) => p.status == GameStatus.Talking
   );
-  if (currentSpeaker) return currentSpeaker;
-};
-
-export const getImgToShow = (people: Puppet[]) => {
-  const currentSpeaker = people.find((p) => p.status == GameStatus.Talking);
-  if (currentSpeaker) return currentSpeaker.img;
-  else return "/images/doll.png";
 };
 
 const sortPuppets = (people: Puppet[]) => {
