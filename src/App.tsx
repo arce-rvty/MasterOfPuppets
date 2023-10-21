@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import "./App.css";
 import { GameStatus, GlobalGameStatus, Puppet } from "./interfaces/puppet";
-import MainContainer from "./components/MainContainer";
-import { Button } from "@mui/material";
 import "animate.css";
+import "./App.css";
 import { getCurrentPuppet } from "./utils";
+
 import { SoundController } from "./components/SoundContoller";
+import MainContainer from "./components/MainContainer";
 import MainImage from "./components/MainImage";
 import WaitingLoadFile from "./components/WaitingLoadFile";
+import NextPuppetButton from "./components/NextPuppetButton";
 import { PuppetOrder } from "./interfaces/order";
 import { OrderService } from "./services/orderService";
 import { StatsService } from "./services/StatsService";
@@ -93,46 +94,28 @@ function App() {
     setSpeaker(newSpeakerName);
   };
 
-
-
   return (
     <>
       <MainImage
         gameStatus={gameStatus}
         currentPuppet={currentPuppet}
         podium={podium} />
+
       {people.length === 0 ? (
         <WaitingLoadFile
           setOrderCriterial={setOrderCriterial}
-          setPeople={function (puppets: Puppet[]): void {
-            setPeople(puppets);
-          }}
+          setPeople={(puppets: Puppet[]) => setPeople(puppets)}
         />
       ) : (
         <>
-          <div style={{ minHeight: "300px" }}>
-            <MainContainer
-              listPuppets={people}
-              gameStatus={gameStatus}
-              podium={podium}
-              changeSpeakerPuppet={changeSpeakerPuppet}
-              speaker={speaker}
-            />
-          </div>
-          <div className="card">
-            <Button
-              size="large"
-              variant="contained"
-              color="error"
-              onClick={() => setNextPuppet()}
-            >
-              NEXT PUPPET
-            </Button>
-          </div>
-          <p className="read-the-docs">
-            <div>Scrum Master's proverb:</div>
-            Tyranny and slavery is the only way
-          </p>
+          <MainContainer
+            listPuppets={people}
+            gameStatus={gameStatus}
+            podium={podium}
+            changeSpeakerPuppet={changeSpeakerPuppet}
+            speaker={speaker}
+          />
+          <NextPuppetButton setNextPuppet={setNextPuppet} />
           <SoundController playSound={playSound} />
         </>
       )}
