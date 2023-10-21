@@ -9,9 +9,12 @@ const TimerController = (props: {
     const { puppet } = props;
 
     useEffect(() => {
-        setInterval(() => {
+        const timer = setInterval(() => {
             setTime(new Date());
         }, 1000);
+        return () => {
+            clearInterval(timer)
+        };
     }, [])
 
     const calculateTime = () => {
