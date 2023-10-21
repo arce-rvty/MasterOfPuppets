@@ -17,7 +17,7 @@ const MainContainer = (props: {
   speaker: string;
 }) => {
   return (
-    <div>
+    <div style={{ minHeight: "300px" }}>
       <Grid container spacing={2}>
         <Grid item xs={4}>
           <ListPuppets
