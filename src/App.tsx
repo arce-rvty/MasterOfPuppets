@@ -10,7 +10,7 @@ import MainImage from "./components/MainImage";
 import WaitingLoadFile from "./components/WaitingLoadFile";
 import { PuppetOrder } from "./interfaces/order";
 import { OrderService } from "./services/orderService";
-import { StatsService } from "./services/statsService";
+import { StatsService } from "./services/StatsService";
 
 function App() {
   const [people, setPeople] = useState<Puppet[]>([]);
@@ -51,6 +51,7 @@ function App() {
     // Get random from people in waiting:
     if (peopleToChoose.length == 0) {
       setGameStatus(GlobalGameStatus.Podium);
+      setSpeaker('');
       StatsService.downloadPuppetStats(people);
       return;
     }
