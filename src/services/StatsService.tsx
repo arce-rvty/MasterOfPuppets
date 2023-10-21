@@ -1,4 +1,4 @@
-import { Puppet } from "interfaces/puppet";
+import { Puppet } from "./../interfaces/puppet";
 
 export class StatsService {
     public static downloadPuppetStats(puppets: Puppet[]) {
