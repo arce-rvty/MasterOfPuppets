@@ -16,10 +16,10 @@ const NextPuppetButton = (props: {
                 NEXT PUPPET
             </Button>
         </div>
-        <p className="read-the-docs">
+        <div className="read-the-docs">
             <div>Scrum Master's proverb:</div>
             Tyranny and slavery is the only way
-        </p>
+        </div>
     </>;
 }
 export default NextPuppetButton;
