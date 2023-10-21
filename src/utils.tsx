@@ -34,6 +34,7 @@ export const getLoserName = (people: Puppet[]): string => {
 
 export const millisToMinutesAndSeconds = (millis: number) => {
   const minutes = Math.floor(millis / 60000);
-  const seconds = ((millis % 60000) / 1000).toFixed(0);
+  let seconds = +((millis % 60000) / 1000).toFixed(0);
+  if (seconds === 60) seconds--;
   return minutes + ":" + (+seconds < 10 ? "0" : "") + seconds;
 };
