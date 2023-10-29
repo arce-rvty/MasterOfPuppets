@@ -7,6 +7,7 @@
     "dev": "vite",
     "start": "electron index.js",
     "buildElectron": "npx electron-packager . MasterOfPuppets --platform=win32 --overwrite",
+    "generateMod": "mods-dev-server dist",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
@@ -21,6 +22,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@tibco/spotfire-mods-dev-server": "^1.0.1",
     "@types/react": "^18.2.30",
     "@types/react-dom": "^18.2.14",
     "@typescript-eslint/eslint-plugin": "^6.8.0",
