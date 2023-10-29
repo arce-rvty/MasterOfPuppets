@@ -10,7 +10,7 @@ import MainImage from "./components/MainImage";
 import WaitingLoadFile from "./components/WaitingLoadFile";
 import NextPuppetButton from "./components/NextPuppetButton";
 import { PuppetOrder } from "./interfaces/order";
-import { OrderService } from "./services/orderService";
+import { OrderService } from "./services/OrderService";
 import { StatsService } from "./services/StatsService";
 
 function App() {
