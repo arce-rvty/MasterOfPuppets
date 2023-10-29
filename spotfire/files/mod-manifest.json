@@ -1,0 +1,20 @@
+{
+    "apiVersion": "1.2",
+    "version": "1.1",
+    "name": "Master of puppets",
+    "id":"sfire-mods-master-puppets",
+    "icon":"icon.svg",
+    "legend": {
+        "defaultVisibility": "hidden"
+    },
+    "properties": [],
+    "files": [
+        "assets/index-e2e009ec.js",
+        "index.html",
+        "assets/index-7cd4a015.css",
+        "images/doll.png",
+        "audio/success.mp3",
+        "images/loser.png",
+        "images/banana.gif"
+    ]
+}
