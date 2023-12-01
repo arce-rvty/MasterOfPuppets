@@ -2,11 +2,11 @@
   "name": "masterofpuppets",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "dev": "vite",
     "start": "electron index.js",
-    "buildElectron": "npx electron-packager . MasterOfPuppets --platform=win32 --overwrite",
+    "buildElectron": "npx electron-packager . MasterOfPuppets --platform=win32 --overwrite --ignore=node_modules",
     "generateMod": "mods-dev-server dist",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
