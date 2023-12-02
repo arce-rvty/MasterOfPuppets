@@ -12,7 +12,12 @@ export const ListPuppets = (props: { list: Puppet[], selectPuppet?: (puppet: str
           className="puppet-list"
           style={{ color: props.speaker != item.name ? "#ff7b46" : "#D32F2F" }}
           key={item.name}>
-          {item.name} {!item.elapsedTime ? <></> : millisToMinutesAndSeconds(item.elapsedTime + item.interruptTime?? 0)}</div >
+          {item.name} {
+            !item.elapsedTime ?
+              <></> :
+              millisToMinutesAndSeconds(item.elapsedTime + (item.interruptTime ?? 0))
+          }
+        </div>
       ))}
     </>
   );
