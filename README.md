@@ -44,3 +44,8 @@ Just need to drag and drop the `spotfire/MasterOfPuppets.mod` file to any dxp fi
 ```text
     yarn buildElectron
 ```
+
+## Docker:
+```sh
+    docker compose up
+```

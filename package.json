@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "commonjs",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "start": "electron index.js",
     "buildElectron": "npx electron-packager . MasterOfPuppets --platform=win32 --overwrite --ignore=node_modules --icon=dist/images/doll.ico",
     "generateMod": "mods-dev-server dist",
